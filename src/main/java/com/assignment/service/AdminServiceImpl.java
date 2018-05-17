@@ -1,11 +1,14 @@
 package com.assignment.service;
 
 import com.assignment.dao.AdminDao;
+import com.assignment.model.Branch;
 import com.assignment.model.Counter;
 import com.assignment.model.Services;
-import org.dom4j.Branch;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class AdminServiceImpl implements AdminService {
 
     @Autowired

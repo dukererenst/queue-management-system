@@ -1,11 +1,13 @@
 package com.assignment.dao;
 
+import com.assignment.model.Branch;
 import com.assignment.model.Counter;
 import com.assignment.model.Services;
 import com.assignment.utils.HibernateUtil;
-import org.dom4j.Branch;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class AdminDaoImpl implements AdminDao {
 
     @Override
@@ -14,6 +16,9 @@ public class AdminDaoImpl implements AdminDao {
             session.getTransaction().begin();
             session.save(branch);
             session.getTransaction().commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            throw e;
         }
         return branch;
     }
@@ -24,6 +29,9 @@ public class AdminDaoImpl implements AdminDao {
             session.getTransaction().begin();
             session.save(counter);
             session.getTransaction().commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            throw e;
         }
         return counter;
     }
@@ -34,6 +42,9 @@ public class AdminDaoImpl implements AdminDao {
             session.getTransaction().begin();
             session.save(services);
             session.getTransaction().commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            throw e;
         }
         return services;
     }

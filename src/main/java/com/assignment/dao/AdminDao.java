@@ -1,8 +1,9 @@
 package com.assignment.dao;
 
+import com.assignment.model.Branch;
 import com.assignment.model.Counter;
 import com.assignment.model.Services;
-import org.dom4j.Branch;
+
 
 public interface AdminDao {
     public Branch registerBranch(Branch branch)throws Exception;

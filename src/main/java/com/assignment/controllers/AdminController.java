@@ -1,6 +1,7 @@
 package com.assignment.controllers;
 
 import com.assignment.config.RabbitMQConfigBuild;
+import com.assignment.model.Branch;
 import com.assignment.model.Counter;
 import com.assignment.model.Customer;
 import com.assignment.model.Services;
@@ -9,7 +10,6 @@ import com.assignment.service.CounterService;
 import com.assignment.service.CustomerService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.dom4j.Branch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
