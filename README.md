@@ -53,16 +53,16 @@ Provide API to manage queue in different branches of ABC bank .
  **Response** Customer detail json
 
  This API is to get customer detail for given customer id.
- 
+
  3.**URL : /service/register**
- 
+
  **Method :** GET
 
  **Response** Success Message
 
  This API is to register multiple queues to rabbit mq based on services-customerType-branchId combination .
  This also attach listener with queues .
- 
+
  4.**URL : /api/branch**
 
  **Method :** POST
@@ -93,7 +93,7 @@ Provide API to manage queue in different branches of ABC bank .
 }
 ```
  This API Registers Counter to system .
- 
+
  6.**URL : /api/service**
 
  **Method :** POST
@@ -107,7 +107,7 @@ Provide API to manage queue in different branches of ABC bank .
 }
 ```
  This API Registers Counter to system .
- 
+
  7.**URL : /api/token/**
 
   **Method :** POST
@@ -139,11 +139,11 @@ Next token to be served in the queue for given service, customer type and branch
   **Response** Success Message : Status OK
 
   This API mark current service completed and if no next service available for same token then close it.
-  
+
 10.**URL : /api/counter/moveNext**
 
   **Method :** PUT
-  
+
     **Request Body**
 ```json
   {
@@ -155,11 +155,17 @@ Next token to be served in the queue for given service, customer type and branch
   **Response** Success Message : Status OK
 
   This API Assign the next step service to the current token and queue it .
-  
+
   11.**URL : /counter/{branchId}**
 
  **Method :** GET
 
  **Response** counter detail for given branch.
+
+ 12.**URL : /token/pending/{branchId}**
+
+**Method :** GET
+
+**Response** provide all tokens which are in waiting state.
 
 This API get the all counters belong to given branch and current active token on that.

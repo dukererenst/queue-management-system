@@ -34,14 +34,14 @@ public class TokenServiceImpl implements TokenService {
 
 
     @Override
-    public Token    createTokenAndAssignToQueue(TokenRequestDTO tokenRequestDTO) throws Exception {
+    public Token    createTokenAndAssignToQueue(TokenRequestDTO tokenRequestDTO) throws TokenException,Exception {
 
         validateTokenInput(tokenRequestDTO);
 
         //get customer details
         Customer customer = customerService.findCustomer(tokenRequestDTO.getAccountNumber());
         if (customer == null){
-            throw new Exception("Csutomer is not Registered");
+            throw new TokenException("Csutomer is not Registered");
         }
 
         Token token = saveToken(tokenRequestDTO, customer);

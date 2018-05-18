@@ -1,6 +1,7 @@
 package com.assignment.service;
 
 import com.assignment.enums.CustomerType;
+import com.assignment.exception.TokenException;
 import com.assignment.model.Token;
 import com.assignment.model.TokenServiceMap;
 
@@ -14,4 +15,8 @@ public interface TokenServiceMapService {
     public void markCurrentServiceCompleted(long tokenId, String serviceName, String customerType, long branchId)throws  Exception;
 
     public List<TokenServiceMap> isAnyPendingService(long tokenId, long branchId)throws Exception;
+
+    public List<TokenServiceMap> getTokenServiceMapForTokenID(long tokenId)throws Exception;
+
+    public List<TokenServiceMap> getAllPendingTokenList(long branchId)throws TokenException,Exception;
 }

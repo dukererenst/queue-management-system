@@ -3,6 +3,7 @@ package com.assignment.dao;
 import com.assignment.enums.CustomerType;
 import com.assignment.exception.TokenException;
 import com.assignment.model.TokenServiceMap;
+import com.assignment.service.TokenService;
 import com.assignment.utils.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -24,7 +25,7 @@ public class TokenServiceMapDaoImpl implements TokenServiceMapDao {
     }
 
     @Override
-    public TokenServiceMap nextToken(String serviceName, CustomerType customerType)throws Exception{
+    public TokenServiceMap nextToken(String serviceName, CustomerType customerType)throws TokenException,Exception{
         TokenServiceMap tokenServiceMap=null;
         try(Session session = HibernateUtil.getSession()) {
             Query query = session.createQuery("FROM TokenServiceMap where serviceName=:serviceName and customerType=:customerType and isCompleted='N' and isAnyServiceActive='N' order by id asc");
@@ -85,6 +86,37 @@ public class TokenServiceMapDaoImpl implements TokenServiceMapDao {
             query.setParameter("branchId",branchId);
             tokenServiceMap = query.list();
 
+        }catch (Exception e) {
+            throw e;
+        }
+        return tokenServiceMap;
+    }
+
+    @Override
+    public List<TokenServiceMap> getTokenServiceMapForTokenID(long tokenId) throws Exception {
+
+        List<TokenServiceMap> tokenServiceMap=null;
+        try(Session session = HibernateUtil.getSession()) {
+            Query query = session.createQuery("FROM TokenServiceMap where tokenId=:tokenId");
+            query.setParameter("tokenId", tokenId);
+            tokenServiceMap = query.list();
+
+        }catch (Exception e) {
+            throw e;
+        }
+        return tokenServiceMap;
+    }
+
+    @Override
+    public List<TokenServiceMap> getAllPendingTokenList(long branchId) throws TokenException, Exception {
+        List<TokenServiceMap> tokenServiceMap=null;
+        try(Session session = HibernateUtil.getSession()) {
+            Query query = session.createQuery("FROM TokenServiceMap where branchId=:branchId");
+            query.setParameter("branchId", branchId);
+            tokenServiceMap = query.list();
+            if (tokenServiceMap== null || tokenServiceMap.isEmpty()){
+                new TokenException("No Pending token available");
+            }
         }catch (Exception e) {
             throw e;
         }

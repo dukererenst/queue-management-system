@@ -7,6 +7,8 @@ import com.assignment.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
+
 @Repository
 public class AdminDaoImpl implements AdminDao {
 
@@ -27,8 +29,9 @@ public class AdminDaoImpl implements AdminDao {
     public Counter registerCounter(Counter counter) throws Exception {
         try(Session session = HibernateUtil.getSession()) {
             session.getTransaction().begin();
-            session.save(counter);
+            long counterId =(long)session.save(counter);
             session.getTransaction().commit();
+            counter.setCounterId(counterId);
         }catch(Exception e){
             e.printStackTrace();
             throw e;
